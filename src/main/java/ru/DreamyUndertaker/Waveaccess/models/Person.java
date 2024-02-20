@@ -1,12 +1,11 @@
 package ru.DreamyUndertaker.Waveaccess.models;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+import jakarta.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,15 +20,15 @@ public class Person {
 	@Column(name="username")
 	@Size(min = 2, max = 100, message = "Имя должно быть от 2 до 100 символов длиной")
 	private String username;
-	@NotEmpty(message = "Роль пользователя")
-	@Column(name="role")
-	private String role;
 	@Column(name="password")
 	private String password;
+	@Column(name="role")
+	private String role;
 
-	public Person(String username, String role) {
+
+
+	public Person(String username) {
 		this.username = username;
-		this.role = role;
 	}
 
 	@Override

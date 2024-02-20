@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>home</title>
 </head>
 <body>
+<div>
+    <a th:href="@{/hello}">hello</a>
+    <a th:href="@{/admin}">admin</a>
 
+    <form th:action="@{/logout}" th:method="POST">
+        <input type="submit" value="logout">
+    </form>
+</div>
 </body>
 </html>

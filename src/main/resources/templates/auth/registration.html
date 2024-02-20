@@ -14,10 +14,6 @@
     <input type="text" th:field="*{password}" id="password">
     <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
     <br>
-    <label for="role">Введите год рождения: </label>
-    <input type="text" th:field="*{role}" id="role">
-    <div th:if="${#fields.hasErrors('role')}" th:errors="*{role}">Year of birth error</div>
-    <br>
     <input type="submit" value="Sign up">
 </form>
 </body>

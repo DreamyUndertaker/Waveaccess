@@ -3,6 +3,7 @@ package ru.DreamyUndertaker.Waveaccess.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,8 +27,8 @@ public class SecurityConfig {
 		http
 				.authorizeRequests ((authorizeRequests) -> authorizeRequests
 						.requestMatchers("/registration").permitAll()
-						.requestMatchers("/", "/home").authenticated()
-
+						.requestMatchers("/", "/home").hasAnyRole("USER", "ADMIN")
+						.requestMatchers("/admin").hasRole("ADMIN")
 				)
 				.formLogin(form -> form
 						.loginPage("/login")
@@ -43,6 +44,9 @@ public class SecurityConfig {
 		return http.build();
 	}
 
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(personDetailsService);
+	}
 	@Bean
 	public PasswordEncoder getPasswordEncoder() {
 		return new BCryptPasswordEncoder();
