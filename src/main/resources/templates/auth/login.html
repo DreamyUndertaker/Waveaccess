@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
 </head>
 <body>
+<div th:if="${param.error}" style="color: red">
+    Неправильный логин или пароль.
+</div>
+<div th:if="${param.logout}" style="color: red">
+    Вы не зарегистрированы.
+</div>
+<form th:action="@{/perform-login}" name="f" th:method="post" >
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+    <label for="username">
+        Введите имя пользователя
+    </label>
+    <input type="text" name="username" id="username">
+    <br>
+    <label for="password">
+        Введите пароль
+    </label>
+    <input type="text" name="password" id="password">
+    <input type="submit" value="Login">
+</form>
+<a th:href="@{auth/registration}">reg</a>
 
 </body>
 </html>
